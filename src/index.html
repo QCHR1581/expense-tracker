@@ -6,37 +6,83 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="input.css">
   <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body class="font-sans">
-    <!-- Blue background -->
-    <main class="bg-sky-200 h-screen flex flex-row justify-center items-center">
+
+<!-- Blue background -->
+<body class="font-sans bg-sky-200 h-screen m-0">
+    <!-- Flexbox -->
+    <main class="flex flex-row justify-center items-center h-full">
         <!-- White rectangle -->
-        <div class="flex flex-col bg-white w-2/5 h-5/6 rounded-lg shadow-lg">
+        <div class="flex flex-col bg-white h-5/6 w-5/6 lg:w-2/5 lg:h-5/6 rounded-lg shadow-lg "> 
+        <!-- Overlay -->
+        <div id="overlay" class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 pointer-events-none active:opacity-1 active:pointer-events-auto hidden"></div>
+        <!-- Modal -->
+         <div id="modal" class="fixed top-1/4 h-3/5 w-3/4 ml-4 mt-10 lg:w-2/6 lg:ml-16 md:w-4/5 border-sky-500 border-2 rounded-lg bg-white shadow-lg hidden">
+                 <!-- Modal-Header -->
+                    <div class="flex flex-row justify-between p-3 border-b-2">
+                         <!-- Title -->
+                        <div class="text-lg font-bold ">Example Modal</div>
+                        <!-- Close-Button -->
+                        <button id="close-button" class="text-lg font-bold">&times;</button>
+                    </div>
+                <!-- Modal-Body -->
+                <div class="p-3">
+                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus, deserunt. Eos, deleniti eaque reprehenderit aperiam nesciunt, nulla autem quos numquam sequi quis eveniet voluptatibus fugit ducimus magni illo doloribus recusandae.
+                </div>
+             </div>
+
             <!-- Balance -->
-            <div class=" flex flex-col justify-center text-4xl pt-14">
-                <h1 class="text-center">BALANCE</h1>
-                <div class="text-center">0,00 €</div>
+            <div class=" flex flex-col self-center  text-4xl md:text-5xl pt-14">
+                <h1 class="">BALANCE</h1>
+                <div id="balance" class="text-center">0,00 €</div>
             </div>
          
 
             <!-- Income and Expenses -->
-            <div class="flex flex-row justify-between h-2/6 p-12">
+            <div class="flex flex-row justify-between h-2/6 p-5 pt-16 lg:px-20 md:px-20 md:pt-32">
                 <!-- Incomes -->
-                <div class=" text-2xl">
+                <div class=" text-2xl md:text-4xl">
                     <h2 class="text-green-400">INCOME</h2>
-                    <div class="text-center" >0,00 €</div>
+                    <div id="income" class="text-center" >0,00 €</div>
                 </div>
                <!-- Expenses -->
-                <div class=" text-2xl">
+                <div class=" text-2xl md:text-4xl">
                     <h2 class="text-red-400">EXPENSES</h2>
-                    <div class="text-center">0,00 €</div>
+                    <div id="expenses" class="text-center">0,00 €</div>
                 </div>
             </div>  
-            
-            
+
+            <!-- Blue rectangle -->
+            <div class="flex justify-center content-center pb-12 lg:pb-12">
+                <div class="border-4 border-sky-300 w-4/5 h-80 lg:h-96 md:h-96 sm:h-96 ssm:h-60 rounded-lg">
+
+                    <!-- List -->
+                    <ul>
+
+                    </ul>
+                  
+                    <!-- Button -->
+                    <div class="flex justify-end content-end p-5">
+                        <button id="plus-button"> 
+                              <!-- Blue circle -->
+                            <div class="rounded-full bg-sky-500 h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14 hover:bg-sky-300 hover:cursor-pointer ">
+                            <!-- White plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                            </svg>
+                        </div>
+                        </button>
+
+
+                    </div>
+                </div>   
+            </div>
         </div>
     </main>
+
+   
 <script src="script.js"></script>
 </body>
 </html>
