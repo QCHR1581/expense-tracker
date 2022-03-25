@@ -1,85 +1,94 @@
 <!doctype html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="input.css">
-  <link href="/dist/output.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="input.css">
+    <link href="/dist/output.css" rel="stylesheet">
 </head>
 <!-- Blue background -->
-<body class="font-sans bg-sky-200 h-screen m-0">
+
+<body class="font-sans bg-sky-200 h-screen w-screen m-0">
+
+    <!-- Overlay -->
+    <div id="overlay"
+        class="fixed top-0 left-0 right-0 bottom-0 bg-gray-300/50 blur-md pointer-events-none active:opacity-1 active:pointer-events-auto scale-0  ">
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed h-2/4 w-9/12 m-12 mt-64 md:ml-32 md:mt-96 lg:w-4/12 lg:h-2/4 lg:ml-64 lg:left-96 border-2 rounded-lg bg-white shadow-lg  transition ease-in-out duration-150 scale-0  ">
+        <!-- Modal-Header -->
+        <div class="flex flex-row justify-end p-3 ">
+            <!-- Close-Button -->
+            <svg id="close-button" xmlns="http://www.w3.org/2000/svg" class="h-10 hover:cursor-pointer hover:stroke-red-300 active:h-9" fill="none" viewBox="0 0 24 24" stroke="red" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+        </div>
+        <!-- Modal-Body -->
+        <div class="p-3">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus, deserunt. Eos, deleniti eaque
+            reprehenderit aperiam nesciunt, nulla autem quos numquam sequi quis eveniet voluptatibus fugit ducimus magni
+            illo doloribus recusandae.
+        </div>
+    </div>
+
     <!-- Flexbox -->
     <main class="flex flex-row justify-center items-center h-full">
-        <!-- White rectangle -->
-        <div class="flex flex-col bg-white h-5/6 w-5/6 lg:w-2/5 lg:h-5/6 rounded-lg shadow-lg "> 
-        <!-- Overlay -->
-        <div id="overlay" class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 pointer-events-none active:opacity-1 active:pointer-events-auto hidden"></div>
-        <!-- Modal -->
-         <div id="modal" class="fixed top-1/4 h-3/5 w-3/4 ml-4 mt-10 lg:w-2/6 lg:ml-16 md:w-4/5 border-sky-500 border-2 rounded-lg bg-white shadow-lg hidden">
-                 <!-- Modal-Header -->
-                    <div class="flex flex-row justify-between p-3 border-b-2">
-                         <!-- Title -->
-                        <div class="text-lg font-bold ">Example Modal</div>
-                        <!-- Close-Button -->
-                        <button id="close-button" class="text-lg font-bold">&times;</button>
-                    </div>
-                <!-- Modal-Body -->
-                <div class="p-3">
-                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus, deserunt. Eos, deleniti eaque reprehenderit aperiam nesciunt, nulla autem quos numquam sequi quis eveniet voluptatibus fugit ducimus magni illo doloribus recusandae.
-                </div>
-             </div>
 
+        <!-- White rectangle -->
+        <div class="flex flex-col bg-white h-5/6 w-5/6 lg:w-2/5 lg:h-5/6 rounded-lg shadow-lg ">
             <!-- Balance -->
             <div class=" flex flex-col self-center  text-4xl md:text-5xl pt-14">
                 <h1 class="">BALANCE</h1>
                 <div id="balance" class="text-center">0,00 €</div>
             </div>
-         
-
             <!-- Income and Expenses -->
             <div class="flex flex-row justify-between h-2/6 p-5 pt-16 lg:px-20 md:px-20 md:pt-32">
                 <!-- Incomes -->
                 <div class=" text-2xl md:text-4xl">
                     <h2 class="text-green-400">INCOME</h2>
-                    <div id="income" class="text-center" >0,00 €</div>
+                    <div id="income" class="text-center">0,00 €</div>
                 </div>
-               <!-- Expenses -->
+                <!-- Expenses -->
                 <div class=" text-2xl md:text-4xl">
                     <h2 class="text-red-400">EXPENSES</h2>
                     <div id="expenses" class="text-center">0,00 €</div>
                 </div>
-            </div>  
+            </div>
 
             <!-- Blue rectangle -->
             <div class="flex justify-center content-center pb-12 lg:pb-12">
-                <div class="border-4 border-sky-300 w-4/5 h-80 lg:h-96 md:h-96 sm:h-96 ssm:h-60 rounded-lg">
-
+                <div class="border-4 border-sky-300 w-4/5 h-56 lg:h-96 md:h-96 sm:h-96 rounded-lg">
                     <!-- List -->
                     <ul>
 
                     </ul>
-                  
                     <!-- Button -->
                     <div class="flex justify-end content-end p-5">
-                        <button id="plus-button"> 
-                              <!-- Blue circle -->
-                            <div class="rounded-full bg-sky-500 h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14 hover:bg-sky-300 hover:cursor-pointer ">
-                            <!-- White plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
+                        <button id="plus-button">
+                            <!-- Blue circle -->
+                            <div
+                                class="rounded-full bg-sky-500 h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14 hover:bg-sky-300 hover:cursor-pointer active:h-10 active:w-10">
+                                <!-- White plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="h-11 w-11 lg:h-16 lg:w-16 md:h-14 md:w-14 active:h-10 active:w-10" fill="none" viewBox="0 0 24 24"
+                                    stroke="white" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                </svg>
+                            </div>
                         </button>
                     </div>
-                </div>   
+                </div>
             </div>
         </div>
     </main>
 
-   
-<script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
