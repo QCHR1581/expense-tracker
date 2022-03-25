@@ -6,10 +6,10 @@ module.exports = {
       // => @media (min-width: 576px) { ... }
 
       'md': '768px',
-      // => @media (min-width: 768px) { ... }
+      // => @media (min-width: 960px) { ... }
 
-      'lg': '1025px',
-      // => @media (min-width: 1024px) { ... }
+      'lg': '1026px',
+      // => @media (min-width: 1440px) { ... }
     },
     extend: {},
   },
