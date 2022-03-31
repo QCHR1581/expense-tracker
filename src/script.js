@@ -3,10 +3,10 @@ const modal = document.querySelector("#modal");
 const openModalButton = document.querySelector("#plus-button");
 const closeModalButton = document.querySelector("#close-button");
 const audioOpen = new Audio();
-audioOpen.src = "openClick.mp3";
+audioOpen.src = "./src/openClick.mp3";
 audioOpen.volume = 0.5;
 const audioClose = new Audio();
-audioClose.src = "closeClick.mp3";
+audioClose.src = "./src/closeClick.mp3";
 audioClose.volume = 0.5;
 
 openModalButton.addEventListener("click", removeHiddenClass = () => {
