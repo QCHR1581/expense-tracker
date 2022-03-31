@@ -10,14 +10,14 @@ audioClose.src = "./src/closeClick.mp3";
 audioClose.volume = 0.5;
 
 openModalButton.addEventListener("click", removeHiddenClass = () => {
-    overlay.classList.remove("scale-0");
-    modal.classList.remove("scale-0");
+    overlay.classList.remove("zero");
+    modal.classList.remove("zero");
     audioOpen.play();
 })
 
 closeModalButton.addEventListener("click", closeWindow = () => {
-    overlay.classList.add("scale-0");
-    modal.classList.add("scale-0");
+    overlay.classList.add("zero");
+    modal.classList.add("zero");
     audioClose.play();
 })
 
