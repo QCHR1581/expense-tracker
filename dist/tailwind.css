@@ -1010,7 +1010,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-@media (min-width: 1026px) {
+@media (min-width: 1024px) {
   .lg\:left-96 {
     left: 24rem;
   }
@@ -1074,6 +1074,14 @@ Ensure the default browser behavior of the `hidden` attribute.
     font-size: 1.875rem;
     line-height: 2.25rem;
   }
+  
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 
