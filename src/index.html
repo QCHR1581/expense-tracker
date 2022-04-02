@@ -7,8 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/dist/tailwind.css" rel="stylesheet">
-    <link rel="stylesheet" href="/src/input.css">
+    <link href="/dist/output.css" rel="stylesheet">
 </head>
 <!-- Blue background -->
 
@@ -16,19 +15,19 @@
 
     <!-- Overlay -->
     <div id="overlay"
-        class="fixed top-0 left-0 right-0 bottom-0 bg-gray-300/50 blur-md pointer-events-none active:opacity-1 active:pointer-events-auto zero ">
+        class="fixed top-0 left-0 right-0 bottom-0 bg-gray-300/50 blur-md pointer-events-none active:opacity-1 active:pointer-events-auto zero  ">
     </div>
 
     <!-- h-2/4 w-9/12 m-12 mt-64 md:ml-32 md:mt-96 lg:w-4/12 lg:h-2/4 lg:ml-64 lg:left-96 -->
 
     <!-- Modal -->
     <div id="modal"
-        class=" fixed modal border-2  rounded-lg bg-white shadow-lg  transition ease-in-out duration-150 zero ">
+        class=" fixed w-9/12 lg:w-4/12 modal border-2 rounded-lg bg-white shadow-lg  transition ease-in-out duration-150 zero ">
         <!-- Modal-Header -->
         <div class="flex flex-row justify-end p-3 ">
             <!-- Close-Button -->
             <svg id="close-button" xmlns="http://www.w3.org/2000/svg"
-                class="h-10 hover:cursor-pointer hover:stroke-red-300 active:h-9 md:h-14" fill="none" viewBox="0 0 24 24"
+                class="h-10 hover:cursor-pointer hover:stroke-red-300 active:h-9 md:h-20" fill="none" viewBox="0 0 24 24"
                 stroke="red" stroke-width="2">
                 <path stroke-linecap="round" stroxke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -36,9 +35,9 @@
 
         <!-- Modal-Body -->
             <!-- Statments -->
-            <form class="flex justify-center"> 
+            <form name="statements" class="flex justify-center"> 
                 <label>
-                    <select class=" text-center p-1 text-3xl w-44 rounded-lg bg-sky-100 border-sky-200 hover:cursor-pointer" name="statments" >
+                    <select id="statements" class=" text-center p-1 text-3xl md:text-6xl md:w-64 lg:text-5xl w-44 rounded-lg bg-sky-100 border-2 border-sky-200 hover:cursor-pointer" name="statments" >
                         <option value="income">Income</option>
                         <option value="expense">Expense</option>
                     </select>
@@ -50,13 +49,13 @@
             <!-- Types -->
             <form class="flex justify-center ">
                 <label>
-                    <select class=" text-center  text-3xl w-44 bg-sky-100 border-sky-200 rounded-lg  hover:cursor-pointer scl" name="type" >
+                    <select id="types" class=" text-center  text-3xl w-44 md:text-6xl md:w-64 lg:text-5xl bg-sky-100 border-2 border-sky-200 rounded-lg  hover:cursor-pointer scl" name="type" >
                         <option value="salary">Salary</option>
                         <option value="rent">Rent</option>
                         <option value="grocery">Grocery</option>
                         <option value="presents">Presents</option>
                         <option value="internet">Internet</option>
-                        <option value="mobile tariff">Mobile Tariff</option>
+                        <option value="tariff">Mobile</option>
                         <option value="electricity">Electricity</option>
                         <option value="presents">Gas</option>  
                     </select>
@@ -67,19 +66,19 @@
 
             <!-- Date -->
             <div class="flex justify-center">
-                <input class=" text-center text-3xl w-44 bg-sky-100 border-sky-200 rounded-lg hover:cursor-pointer" type="date" name="date">
+                <input id="date" class=" text-center p-1 text-3xl w-44 md:text-6xl lg:text-5xl md:w-64 bg-sky-100 border-2 border-sky-200 rounded-lg hover:cursor-pointer" type="date" name="date">
             </div>
 
             <br>
 
             <!-- Amount -->
             <div class="flex justify-center">
-                <input class=" text-center text-3xl w-44 bg-sky-100 border-sky-200 rounded-lg hover:cursor-pointer" type="number" name="amount" placeholder="Amount ..." >
+                <input id="amount" class=" text-center p-1 text-3xl w-44 md:text-6xl lg:text-5xl md:w-64 bg-sky-100 border-2 border-sky-200 rounded-lg hover:cursor-pointer" type="number" name="amount" placeholder="Amount ..." >
             </div>
 
             <!-- Add-button -->
             <div class="flex justify-end p-10 ">
-                <button class=" w-16 p-2  bg-sky-500 rounded-lg hover:bg-sky-200 hover:cursor-pointer" type="submit">ADD</button>
+                <button id="add-Button" class=" w-16 p-2 md:text-5xl md:w-28 lg:text-4xl bg-sky-500 rounded-lg hover:bg-sky-200 hover:cursor-pointer" type="submit">ADD</button>
             </div>
             
         </div>
@@ -110,7 +109,7 @@
 
             <!-- Blue rectangle -->
             <div class="flex justify-center content-center pb-12 lg:pb-12">
-                <div class="border-4 border-sky-300 w-4/5 h-56 lg:h-72 md:h-72 sm:h-96 rounded-lg">
+                <div class="border-4 border-sky-300 w-4/5 h-56 lg:h-72 md:h-96 sm:h-96 rounded-lg">
                     <!-- List -->
                     <ul>
 
