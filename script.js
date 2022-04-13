@@ -49,9 +49,11 @@ getDate = () => {
 }
 
 getAmount = () => {
-   if (statements.options[statements.selectedIndex].text === "Income") {
-      document.querySelector("#income").textContent += parseFloat(amount.value); 
-   } 
+    if (statements.options[statements.selectedIndex].text === "Income") {
+       let currentValue = parseFloat(document.querySelector("#income").textContent) || 0;
+       let newValue = parseFloat(amount.value);
+       document.querySelector("#income").textContent = currentValue + newValue; 
+    } 
 }
 
 // Gets Add-Button
