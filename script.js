@@ -5,25 +5,25 @@ const openModalButton = document.querySelector("#plus-button");
 const closeModalButton = document.querySelector("#close-button");
 
 // Get audio files
-const audioOpen = new Audio();
-audioOpen.src = "/src/openClick.mp3";
-audioOpen.volume = 0.5;
-const audioClose = new Audio();
-audioClose.src = "/src/closeClick.mp3";
-audioClose.volume = 0.5;
+// const audioOpen = new Audio();
+// audioOpen.src = "/src/openClick.mp3";
+// audioOpen.volume = 0.5;
+// const audioClose = new Audio();
+// audioClose.src = "/src/closeClick.mp3";
+// audioClose.volume = 0.5;
 
 // Opens modal with sound
 openModalButton.addEventListener("click", removeHiddenClass = () => {
     overlay.classList.remove("zero");
     modal.classList.remove("zero");
-    audioOpen.play();
+    // audioOpen.play();
 })
 
 // Closes modal with sound
 closeModalButton.addEventListener("click", closeWindow = () => {
     overlay.classList.add("zero");
     modal.classList.add("zero");
-    audioClose.play();
+    // audioClose.play();
 })
 
 
@@ -45,10 +45,13 @@ getTypes = () => {
 
 getDate = () => {
     console.log(date.value);
+    
 }
 
 getAmount = () => {
-    console.log(amount.value);
+   if (statements.options[statements.selectedIndex].text === "Income") {
+      document.querySelector("#income").textContent += parseFloat(amount.value); 
+   } 
 }
 
 // Gets Add-Button
