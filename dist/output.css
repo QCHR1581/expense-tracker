@@ -630,6 +630,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(125 211 252 / var(--tw-border-opacity));
 }
 
+.border-red-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(248 113 113 / var(--tw-border-opacity));
+}
+
 .bg-sky-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(186 230 253 / var(--tw-bg-opacity));
@@ -652,11 +657,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-sky-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(14 165 233 / var(--tw-bg-opacity));
-}
-
-.bg-sky-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(56 189 248 / var(--tw-bg-opacity));
 }
 
 .p-3 {
@@ -788,18 +788,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   pointer-events: auto;
 }
 
-.active\:h-9:active {
-  height: 2.25rem;
-}
-
-.active\:h-10:active {
-  height: 2.5rem;
-}
-
-.active\:w-10:active {
-  width: 2.5rem;
-}
-
 @media (min-width: 576px) {
   .sm\:h-96 {
     height: 24rem;
@@ -842,6 +830,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
+  }
+
+  .md\:py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .md\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .md\:pt-32 {
