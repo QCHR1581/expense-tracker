@@ -33,7 +33,38 @@ const types = document.querySelector("#types");
 const date = document.querySelector("#date");
 const amount = document.querySelector("#amount");
 
-// Gets user inputs
+
+// Converts formated string (eg. 1.000,50 €) to float (eg. 1000.50)
+function toFloat(num) {
+    dotPos = num.indexOf('.');
+    commaPos = num.indexOf(',');
+
+    if (dotPos < 0)
+        dotPos = 0;
+
+    if (commaPos < 0)
+        commaPos = 0;
+
+    if ((dotPos > commaPos) && dotPos)
+        sep = dotPos;
+    else {
+        if ((commaPos > dotPos) && commaPos)
+            sep = commaPos;
+        else
+            sep = false;
+    }
+
+    if (sep == false)
+        return parseFloat(num.replace(/[^\d]/g, ""));
+
+    return parseFloat(
+        num.substr(0, sep).replace(/[^\d]/g, "") + '.' + 
+        num.substr(sep+1, num.length).replace(/[^0-9]/, "")
+    );
+
+}
+
+// Get inputs
 getStatement = () => {
     console.log(statements.options[statements.selectedIndex].text);
 };
@@ -48,29 +79,30 @@ getDate = () => {
 }
 
 displayStatements = () => {
-    if (statements.options[statements.selectedIndex].text === "Income") {
-       let currentValue = parseFloat(document.querySelector("#income").textContent) || 0;
-       console.log(currentValue);
-       let newValue = parseFloat(amount.value);
-       console.log(newValue);
 
+    // Calculates amount for income
+    if (statements.options[statements.selectedIndex].text === "Income") {
+       let currentValue = toFloat(document.querySelector("#income").textContent) || 0;
+       let newValue = parseFloat(amount.value);
        let sum = currentValue + newValue;
        let formatSum = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sum);
        document.querySelector("#income").textContent = formatSum; 
 
+    // Sound for added income
        const incomeAudio = new Audio;
        incomeAudio.src = "/src/addedIncome.wav";
        incomeAudio.volume = 0.5;
        incomeAudio.play();
        
-
+    // Calculates amount for expense
     } else if (statements.options[statements.selectedIndex].text === "Expense") {
-       let currentValue = parseFloat(document.querySelector("#expenses").textContent) || 0;
+       let currentValue = toFloat(document.querySelector("#expenses").textContent) || 0;
        let newValue = parseFloat(amount.value);
        let sum = currentValue + newValue;
        let formatSum = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sum);
        document.querySelector("#expenses").textContent = formatSum; 
 
+    // Sound for added expense
        const expemseAudio = new Audio;
        expemseAudio.src = "/src/addedExpense.mp3";
        expemseAudio.volume = 0.5;
@@ -78,16 +110,23 @@ displayStatements = () => {
     }
 
 displayBalance = () => {
-    
 
-    
-
+    // Calculates amount of balance
+    let income = toFloat(document.querySelector("#income").textContent) || 0;
+    let expense = toFloat(document.querySelector("#expenses").textContent) || 0;
+    let balance = income - expense;
     let formatBalance = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(balance);
     document.querySelector("#balance").textContent = formatBalance; 
 
+    // If balance is less than 0 --> text = red
     if (balance < 0) {
         balanceText = document.querySelector("#balance");
         balanceText.classList.add("text-red-400");
+
+    // If balance is greater than 0 --> remove red text
+    } else if (balance > 0) {
+        balanceText = document.querySelector("#balance");
+        balanceText.classList.remove("text-red-400");
     }
   
 
@@ -98,28 +137,33 @@ displayBalance = () => {
 // Gets Add-Button
 const addButton = document.querySelector("#add-Button");
 
-// When Add-Button gets clicked, checks for input and displays it
-addButton.addEventListener("click", submitInputs = () => {
+// When Add-Button gets clicked --> display inputs
+addButton.addEventListener("click", displayInputs= () => {
 
+    // If no input for date and amount --> border = red
     if (!date.value && !amount.value) {
         alert("Please enter date and amount!");
         date.classList.add("border-4", "border-red-400");
         amount.classList.add("border-4", "border-red-400");
 
+     // If no input for date --> border = red
     } else if (!date.value) {
         alert("Please enter date!");
         date.classList.add("border-4", "border-red-400");
 
+     // If no input for amount --> border = red
     } else if (!amount.value) {
         alert("Please enter amount!");
         amount.classList.add("border-4", "border-red-400");
 
+    // Displays inputs
     } else {
         getStatement();
         getTypes();
         getDate();
         displayStatements();
         displayBalance();
+        // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
     } 
