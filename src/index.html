@@ -7,18 +7,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/dist/output.css" rel="stylesheet">
 </head>
 <!-- Blue background -->
-
 <body class="font-sans bg-sky-200 h-screen w-screen m-0">
 
     <!-- Overlay -->
     <div id="overlay"
         class="fixed top-0 left-0 right-0 bottom-0 bg-gray-300/50 blur-md pointer-events-none active:opacity-1 active:pointer-events-auto zero  ">
     </div>
-
-    <!-- h-2/4 w-9/12 m-12 mt-64 md:ml-32 md:mt-96 lg:w-4/12 lg:h-2/4 lg:ml-64 lg:left-96 -->
 
     <!-- Modal -->
     <div id="modal"
@@ -110,10 +108,6 @@
             <!-- Blue rectangle -->
             <div class="flex justify-center content-center pb-12 lg:pb-12">
                 <div class="border-4 border-sky-300 w-4/5 h-56 lg:h-72 md:h-96 sm:h-96 rounded-lg">
-                    <!-- List -->
-                    <ul>
-
-                    </ul>
                     <!-- Button -->
                     <div class="flex justify-end content-end p-5">
                         <button id="plus-button">
@@ -129,6 +123,11 @@
                             </div>
                         </button>
                     </div>
+                     <!-- List -->
+                     <ul class="text-xxs p-2 bg-opacity-50" id="list">
+                         <!-- <li class= "py-1 pl-2 border-blue-200 rounded-lg border-2">Salary 2022-04-21 5.000,00 € X</li> -->
+
+                    </ul>
                 </div>
             </div>
         </div>

@@ -108,6 +108,7 @@ displayStatements = () => {
        expemseAudio.volume = 0.5;
        expemseAudio.play();
     }
+}
 
 displayBalance = () => {
 
@@ -128,9 +129,30 @@ displayBalance = () => {
         balanceText = document.querySelector("#balance");
         balanceText.classList.remove("text-red-400");
     }
-  
-
 }
+
+addListElement = () => {
+    let entry = document.createElement('li');
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("fa", "fa-trash");
+
+
+    let linebreak = document.createElement("br");
+    list.appendChild(linebreak);
+
+    let income = document.querySelector("#income").textContent;
+    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income), " ", deleteButton);
+    list.appendChild(entry);
+
+
+    entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg");
+
+    if (statements.options[statements.selectedIndex].text === "Income") {
+        entry.classList.add("text-green-400");
+    } else {
+        entry.classList.add("text-red-400");
+    }
 
 }
 
@@ -163,26 +185,9 @@ addButton.addEventListener("click", displayInputs= () => {
         getDate();
         displayStatements();
         displayBalance();
+        addListElement();
         // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
     } 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
