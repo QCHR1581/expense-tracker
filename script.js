@@ -134,19 +134,25 @@ displayBalance = () => {
 addListElement = () => {
     let entry = document.createElement('li');
 
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("fa", "fa-trash");
-
-
     let linebreak = document.createElement("br");
     list.appendChild(linebreak);
 
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-2");
+    deleteButton.addEventListener("click", deleteListelement = () => {
+        entry.parentNode.removeChild(entry);
+        list.removeChild(linebreak); 
+        if (statements.options[statements.selectedIndex].text === "Income") {
+            income - income;
+        }
+    })
+
     let income = document.querySelector("#income").textContent;
-    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income), " ", deleteButton);
+    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income), deleteButton);
     list.appendChild(entry);
 
 
-    entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg");
+    entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg", "flex", "flex-row", "justify-between");
 
     if (statements.options[statements.selectedIndex].text === "Income") {
         entry.classList.add("text-green-400");
@@ -155,6 +161,8 @@ addListElement = () => {
     }
 
 }
+
+
 
 // Gets Add-Button
 const addButton = document.querySelector("#add-Button");
@@ -191,22 +199,3 @@ addButton.addEventListener("click", displayInputs= () => {
         amount.classList.remove("border-4", "border-red-400");
     } 
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
