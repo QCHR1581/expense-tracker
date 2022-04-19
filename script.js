@@ -132,30 +132,31 @@ displayBalance = () => {
 }
 
 addListElement = () => {
+    // Creates li-element
     let entry = document.createElement('li');
 
+    // Creates br-element
     let linebreak = document.createElement("br");
     list.appendChild(linebreak);
 
+
+    // Creates button-element
     let deleteButton = document.createElement("button");
-    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-2");
+    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
     })
 
-    let income = document.querySelector("#income").textContent;
-    let expense = document.querySelector("#expenses").textContent;
-
-    // if (statements.options[statements.selectedIndex].text === "Income") {
-    //     let statement = income;
-    // } else 
-    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income || expense), deleteButton);
+    // Adds selected elements to ul
+    let formatStatement = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount.value);
+    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + formatStatement), deleteButton);
     list.appendChild(entry);
 
-
+    // Adds layout for ul-elements
     entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg", "flex", "flex-row", "justify-between");
 
+    // Statement = Income --> text = green , Statement = Expense --> text = red
     if (statements.options[statements.selectedIndex].text === "Income") {
         entry.classList.add("text-green-400");
     } else {
