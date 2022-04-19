@@ -125,7 +125,7 @@ displayBalance = () => {
         balanceText.classList.add("text-red-400");
 
     // If balance is greater than 0 --> remove red text
-    } else if (balance > 0) {
+    } else if (balance >= 0) {
         balanceText = document.querySelector("#balance");
         balanceText.classList.remove("text-red-400");
     }
@@ -142,13 +142,15 @@ addListElement = () => {
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
-        if (statements.options[statements.selectedIndex].text === "Income") {
-            income - income;
-        }
     })
 
     let income = document.querySelector("#income").textContent;
-    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income), deleteButton);
+    let expense = document.querySelector("#expenses").textContent;
+
+    // if (statements.options[statements.selectedIndex].text === "Income") {
+    //     let statement = income;
+    // } else 
+    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income || expense), deleteButton);
     list.appendChild(entry);
 
 
