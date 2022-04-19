@@ -138,7 +138,7 @@ addListElement = () => {
     list.appendChild(linebreak);
 
     let deleteButton = document.createElement("button");
-    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-2");
+    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
@@ -147,11 +147,17 @@ addListElement = () => {
     let income = document.querySelector("#income").textContent;
     let expense = document.querySelector("#expenses").textContent;
 
-    // if (statements.options[statements.selectedIndex].text === "Income") {
-    //     let statement = income;
-    // } else 
-    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + income || expense), deleteButton);
-    list.appendChild(entry);
+    if (statements.options[statements.selectedIndex].text === "Income") {
+        let statement = income;
+        entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + statement), deleteButton);
+        list.appendChild(entry);
+    } else {
+        let statement = expense;
+        entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + statement), deleteButton);
+        list.appendChild(entry);
+    }
+
+  
 
 
     entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg", "flex", "flex-row", "justify-between");
