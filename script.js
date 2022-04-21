@@ -146,6 +146,10 @@ addListElement = () => {
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
+        if (classList = "text-red-400") {
+            // console.log("red class");
+            sum -= amount.value;
+        }
     })
 
     // Adds selected elements to ul
