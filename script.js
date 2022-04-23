@@ -64,21 +64,9 @@ function toFloat(num) {
 
 }
 
-// Get inputs
-getStatement = () => {
-    console.log(statements.options[statements.selectedIndex].text);
-};
 
-getTypes = () => {
-    console.log(types.options[types.selectedIndex].text)
-};
-
-getDate = () => {
-    console.log(date.value);
-    
-}
-
-displayStatements = () => {
+// Displays incomes and expenses
+var displayStatements = () => {
 
     // Calculates amount for income
     if (statements.options[statements.selectedIndex].text === "Income") {
@@ -110,7 +98,7 @@ displayStatements = () => {
     }
 }
 
-displayBalance = () => {
+var displayBalance = () => {
 
     // Calculates amount of balance
     let income = toFloat(document.querySelector("#income").textContent) || 0;
@@ -131,7 +119,7 @@ displayBalance = () => {
     }
 }
 
-addListElement = () => {
+var addListElement = () => {
     // Creates li-element
     let entry = document.createElement('li');
 
@@ -146,11 +134,8 @@ addListElement = () => {
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
-        if (classList = "text-red-400") {
-            // console.log("red class");
-            sum -= amount.value;
-        }
-    })
+        }       
+    )
 
     // Adds selected elements to ul
     let formatStatement = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount.value);
@@ -169,13 +154,11 @@ addListElement = () => {
 
 }
 
-
-
 // Gets Add-Button
 const addButton = document.querySelector("#add-Button");
 
-// When Add-Button gets clicked --> display inputs
-addButton.addEventListener("click", displayInputs= () => {
+// Display inputs 
+var displayInputs = () => {
 
     // If no input for date and amount --> border = red
     if (!date.value && !amount.value) {
@@ -193,11 +176,7 @@ addButton.addEventListener("click", displayInputs= () => {
         alert("Please enter amount!");
         amount.classList.add("border-4", "border-red-400");
 
-    // Displays inputs
     } else {
-        getStatement();
-        getTypes();
-        getDate();
         displayStatements();
         displayBalance();
         addListElement();
@@ -205,4 +184,34 @@ addButton.addEventListener("click", displayInputs= () => {
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
     } 
-})
+}
+
+var addListAfterKeypress = (event) => {
+	if (!date.value && !amount.value && event.keyCode === 13) {
+        alert("Please enter date and amount");
+        date.classList.add("border-4", "border-red-400");
+        amount.classList.add("border-4", "border-red-400");
+	} else if (!date.value && event.keyCode === 13) {
+        alert("Please enter date!");
+        date.classList.add("border-4", "border-red-400");
+    } else if (!amount.value && event.keyCode === 13) {
+        alert("Please enter amount!");
+        amount.classList.add("border-4", "border-red-400");
+    } else if (date.value && amount.value && event.keyCode === 13) {
+        displayStatements();
+        displayBalance();
+        addListElement();
+        // Removes red border around date and amount
+        date.classList.remove("border-4", "border-red-400");
+        amount.classList.remove("border-4", "border-red-400");
+    } 
+}
+
+// When Add-Button gets clicked --> display inputs
+addButton.addEventListener("click", displayInputs);
+
+// When "Enter" gets pressed --> display inputs
+date.addEventListener("keypress", addListAfterKeypress);
+amount.addEventListener("keypress", addListAfterKeypress);
+
+
