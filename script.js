@@ -65,16 +65,22 @@ function toFloat(num) {
 }
 
 
+
+
+
 // Displays incomes and expenses
 var displayStatements = () => {
 
-    // Calculates amount for income
+    // Displays incomes
     if (statements.options[statements.selectedIndex].text === "Income") {
-       let currentValue = toFloat(document.querySelector("#income").textContent) || 0;
-       let newValue = parseFloat(amount.value);
-       let sum = currentValue + newValue;
-       let formatSum = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sum);
-       document.querySelector("#income").textContent = formatSum; 
+
+        // Calculates amount for income
+        currentValueIncome = toFloat(document.querySelector("#income").textContent) || 0;
+        newValueIncome = parseFloat(amount.value);
+        sumIncome = currentValueIncome + newValueIncome;
+        formatSumIncome = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumIncome);
+       
+        document.querySelector("#income").textContent = formatSumIncome; 
 
     // Sound for added income
        const incomeAudio = new Audio;
@@ -82,13 +88,16 @@ var displayStatements = () => {
        incomeAudio.volume = 0.5;
        incomeAudio.play();
        
-    // Calculates amount for expense
+    // Displays expenses
     } else if (statements.options[statements.selectedIndex].text === "Expense") {
-       let currentValue = toFloat(document.querySelector("#expenses").textContent) || 0;
-       let newValue = parseFloat(amount.value);
-       let sum = currentValue + newValue;
-       let formatSum = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sum);
-       document.querySelector("#expenses").textContent = formatSum; 
+
+        // Calculates amount for expenses
+        currentValueExpense = toFloat(document.querySelector("#expenses").textContent) || 0;
+        newValueExpense = parseFloat(amount.value);
+        sumExpense = currentValueExpense + newValueExpense;
+        formatSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+       
+       document.querySelector("#expenses").textContent = formatSumExpense; 
 
     // Sound for added expense
        const expemseAudio = new Audio;
@@ -98,6 +107,7 @@ var displayStatements = () => {
     }
 }
 
+// Displays balance
 var displayBalance = () => {
 
     // Calculates amount of balance
@@ -119,7 +129,8 @@ var displayBalance = () => {
     }
 }
 
-var addListElement = () => {
+// Creates list elements
+var creeateListElements = () => {
     // Creates li-element
     let entry = document.createElement('li');
 
@@ -128,12 +139,16 @@ var addListElement = () => {
     list.appendChild(linebreak);
 
 
-    // Creates button-element
+    // Creates delete-button
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
     deleteButton.addEventListener("click", deleteListelement = () => {
         entry.parentNode.removeChild(entry);
         list.removeChild(linebreak); 
+        if(entry.classList.contains("text-red-400")) {
+            console.log(currentValueExpense - newValueExpense);
+        }
+
         }       
     )
 
@@ -179,14 +194,14 @@ var displayInputs = () => {
     } else {
         displayStatements();
         displayBalance();
-        addListElement();
+        creeateListElements();
         // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
     } 
 }
 
-var addListAfterKeypress = (event) => {
+var createListAfterKeypress = (event) => {
 	if (!date.value && !amount.value && event.keyCode === 13) {
         alert("Please enter date and amount");
         date.classList.add("border-4", "border-red-400");
@@ -200,7 +215,7 @@ var addListAfterKeypress = (event) => {
     } else if (date.value && amount.value && event.keyCode === 13) {
         displayStatements();
         displayBalance();
-        addListElement();
+        creeateListElements();
         // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
@@ -211,7 +226,7 @@ var addListAfterKeypress = (event) => {
 addButton.addEventListener("click", displayInputs);
 
 // When "Enter" gets pressed --> display inputs
-date.addEventListener("keypress", addListAfterKeypress);
-amount.addEventListener("keypress", addListAfterKeypress);
+date.addEventListener("keypress", createListAfterKeypress);
+amount.addEventListener("keypress", createListAfterKeypress);
 
 
