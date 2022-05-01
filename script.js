@@ -34,6 +34,7 @@ const date = document.querySelector("#date");
 const amount = document.querySelector("#amount");
 
 
+
 // Converts formated string (eg. 1.000,50 €) to float (eg. 1000.50)
 function toFloat(num) {
     dotPos = num.indexOf('.');
@@ -65,16 +66,22 @@ function toFloat(num) {
 }
 
 
+
+
+
 // Displays incomes and expenses
 var displayStatements = () => {
 
-    // Calculates amount for income
+    // Displays incomes
     if (statements.options[statements.selectedIndex].text === "Income") {
-       let currentValueIncome = toFloat(document.querySelector("#income").textContent) || 0;
-       let newValueIncome = parseFloat(amount.value);
-       let sumIncome = currentValueIncome + newValueIncome;
-       let formatSumIncome = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumIncome);
-       document.querySelector("#income").textContent = formatSumIncome; 
+
+        // Calculates amount for income
+        currentValueIncome = toFloat(document.querySelector("#income").textContent) || 0;
+        newValueIncome = parseFloat(amount.value);
+        sumIncome = currentValueIncome + newValueIncome;
+        formatSumIncome = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumIncome);
+       
+        document.querySelector("#income").textContent = formatSumIncome; 
 
     // Sound for added income
        const incomeAudio = new Audio;
@@ -82,12 +89,16 @@ var displayStatements = () => {
        incomeAudio.volume = 0.5;
        incomeAudio.play();
        
-    // Calculates amount for expense
+    // Displays expenses
     } else if (statements.options[statements.selectedIndex].text === "Expense") {
-       let currentValueExpense = toFloat(document.querySelector("#expenses").textContent) || 0;
-       let newValueExpense = parseFloat(amount.value);
-       sumExpense = currentValueExpense + newValueExpense;
-       let formatSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+
+        // Calculates amount for expenses
+        currentValueExpense = toFloat(document.querySelector("#expenses").textContent) || 0;
+        newValueExpense = parseFloat(amount.value);
+        sumExpense = currentValueExpense + newValueExpense;
+        formatSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+        console.log(sumExpense);
+
        document.querySelector("#expenses").textContent = formatSumExpense; 
 
     // Sound for added expense
@@ -97,6 +108,8 @@ var displayStatements = () => {
        expemseAudio.play();
     }
 }
+
+
 
 // Displays balance
 var displayBalance = () => {
@@ -120,66 +133,89 @@ var displayBalance = () => {
     }
 }
 
-// Creates list elements and adds them
-var addListElement = () => {
 
+
+// Creates list elements
+var createListElements = () => {
     // Creates li-element
     let entry = document.createElement('li');
+    span = document.createElement('span');
 
     // Creates br-element
     let linebreak = document.createElement("br");
     list.appendChild(linebreak);
 
-    // Adds id to each li-element
-    // let addI = () => {
-    //     allItems = document.querySelectorAll("#list li");
-    //     items = document.querySelector("li");
-    //     tab = [];
-    
-    //     for ( i = 0; i < allItems.length; i++) {
-    //         tab.push(allItems[i])
-    //         allItems[i].id = "element" + (i + 1 );
-    //         }
-    //     }
-    //     addI();
-    
-        // Creates delete-button
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
-        deleteButton.addEventListener("click", deleteListElement = () => {
-        entry.parentNode.removeChild(entry)
-        sumExpense -= amount.value;
-        formatUpdatedSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
-        document.querySelector("#expenses").textContent = formatUpdatedSumExpense;
-
-        list.removeChild(linebreak); 
-     }       
-    )
-
-    // Adds selected elements to ul
     let formatStatement = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(amount.value);
-    entry.append(document.createTextNode(types.options[types.selectedIndex].text + " " + date.value + " " + formatStatement), deleteButton);
-    list.append(entry);
+    span.append(formatStatement);
 
+    // Creates delete-button
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
+   
+    // Adds selected elements to ul
+    entry.append(`${types.options[types.selectedIndex].text} `);
+    entry.append(`${date.value} `)
+    entry.append(`${span.innerText} `)
+    entry.append(deleteButton);
+    list.appendChild(entry);
+
+    deleteButton.addEventListener("click",(e) => {
+        // console.log(e.target.parentNode.childNodes[0]);
+        
+        if (entry.classList.contains("text-red-400")) {
+            balance += toFloat(entry.childNodes[2].textContent);
+            sumExpense -= toFloat(entry.childNodes[2].textContent);
+
+            formatUpdatedSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+            document.querySelector("#expenses").textContent = formatUpdatedSumExpense;
+    
+            formatBalance = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(balance);
+            document.querySelector("#balance").textContent = formatBalance; 
+    
+        } else if (!entry.classList.contains("text-red-400")) {
+            balance -= toFloat(entry.childNodes[2].textContent);
+            sumIncome -= toFloat(entry.childNodes[2].textContent);
+
+            formatSumIncome = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumIncome);
+            document.querySelector("#income").textContent = formatSumIncome; 
+
+            formatBalance = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(balance);
+            document.querySelector("#balance").textContent = formatBalance; 
+        };
+
+         // If balance is less than 0 --> text = red
+        if (balance < 0) {
+            balanceText = document.querySelector("#balance");
+            balanceText.classList.add("text-red-400");
+
+        // If balance is greater than 0 --> remove red text
+        } else if (balance >= 0) {
+            balanceText = document.querySelector("#balance");
+            balanceText.classList.remove("text-red-400");
+        }
+        
+        entry.parentNode.removeChild(entry)
+        list.removeChild(linebreak); 
+     })
+   
 
     // Adds layout for ul-elements
     entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg", "flex", "flex-row", "justify-between");
 
-    console.log(amount.value);
-    
     // Statement = Income --> text = green , Statement = Expense --> text = red
     if (statements.options[statements.selectedIndex].text === "Income") {
         entry.classList.add("text-green-400");
     } else {
         entry.classList.add("text-red-400");
     }
+
 }
 
 // Gets Add-Button
 const addButton = document.querySelector("#add-Button");
 
-// Display inputs after click
-var addListAfterClick = () => {
+// Display inputs 
+var displayInputs = () => {
 
     // If no input for date and amount --> border = red
     if (!date.value && !amount.value) {
@@ -200,40 +236,28 @@ var addListAfterClick = () => {
     } else {
         displayStatements();
         displayBalance();
-        addListElement();
-        
+        createListElements();
         // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
     } 
 }
 
-// Display inputs after keypress
-
-var addListAfterKeypress = (event) => {
-
-    // If no input for date and amount --> border = red
-    if (!date.value && !amount.value && event.keyCode === 13) {
+var createListAfterKeypress = (event) => {
+	if (!date.value && !amount.value && event.keyCode === 13) {
         alert("Please enter date and amount");
         date.classList.add("border-4", "border-red-400");
         amount.classList.add("border-4", "border-red-400");
-
-     // If no input for date --> border = red
-    } else if (!date.value && event.keyCode === 13) {
+	} else if (!date.value && event.keyCode === 13) {
         alert("Please enter date!");
-
-    // If no input for amount --> border = red
         date.classList.add("border-4", "border-red-400");
     } else if (!amount.value && event.keyCode === 13) {
         alert("Please enter amount!");
-
-
         amount.classList.add("border-4", "border-red-400");
     } else if (date.value && amount.value && event.keyCode === 13) {
         displayStatements();
         displayBalance();
-        addListElement();
-
+        createListElements();
         // Removes red border around date and amount
         date.classList.remove("border-4", "border-red-400");
         amount.classList.remove("border-4", "border-red-400");
@@ -241,8 +265,10 @@ var addListAfterKeypress = (event) => {
 }
 
 // When Add-Button gets clicked --> display inputs
-addButton.addEventListener("click", addListAfterClick);
+addButton.addEventListener("click", displayInputs);
 
 // When "Enter" gets pressed --> display inputs
-date.addEventListener("keypress", addListAfterKeypress);
-amount.addEventListener("keypress", addListAfterKeypress);
+date.addEventListener("keypress", createListAfterKeypress);
+amount.addEventListener("keypress", createListAfterKeypress);
+
+
