@@ -84,10 +84,10 @@ var displayStatements = () => {
        
     // Calculates amount for expense
     } else if (statements.options[statements.selectedIndex].text === "Expense") {
-       currentValueExpense = toFloat(document.querySelector("#expenses").textContent) || 0;
-       newValueExpense = parseFloat(amount.value);
+       let currentValueExpense = toFloat(document.querySelector("#expenses").textContent) || 0;
+       let newValueExpense = parseFloat(amount.value);
        sumExpense = currentValueExpense + newValueExpense;
-       formatSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+       let formatSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
        document.querySelector("#expenses").textContent = formatSumExpense; 
 
     // Sound for added expense
@@ -98,6 +98,7 @@ var displayStatements = () => {
     }
 }
 
+// Displays balance
 var displayBalance = () => {
 
     // Calculates amount of balance
@@ -119,6 +120,7 @@ var displayBalance = () => {
     }
 }
 
+// Creates list elements and adds them
 var addListElement = () => {
 
     // Creates li-element
@@ -129,27 +131,28 @@ var addListElement = () => {
     list.appendChild(linebreak);
 
     // Adds id to each li-element
-    let addI = () => {
-        items = document.querySelectorAll("#list li");
-        tab = [];
+    // let addI = () => {
+    //     allItems = document.querySelectorAll("#list li");
+    //     items = document.querySelector("li");
+    //     tab = [];
     
-        for (var i = 0; i < items.length; i++) {
-            tab.push(items[i])
-            items[i].id = "element" + (i + 1 );
-            console.log(items)
-        }
-    }
-    addI();
+    //     for ( i = 0; i < allItems.length; i++) {
+    //         tab.push(allItems[i])
+    //         allItems[i].id = "element" + (i + 1 );
+    //         }
+    //     }
+    //     addI();
     
-    // Creates delete-button
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
-    deleteButton.addEventListener("click", deleteListElement = () => {
-        entry.parentNode.removeChild(entry);
+        // Creates delete-button
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("fa", "fa-trash", "text-red-400", "p-1");
+        deleteButton.addEventListener("click", deleteListElement = () => {
+        entry.parentNode.removeChild(entry)
+        sumExpense -= amount.value;
+        formatUpdatedSumExpense = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(sumExpense);
+        document.querySelector("#expenses").textContent = formatUpdatedSumExpense;
+
         list.removeChild(linebreak); 
-        if(entry.classList.contains("text-red-400")){
-            console.log("Red");
-        }
      }       
     )
 
@@ -161,6 +164,8 @@ var addListElement = () => {
 
     // Adds layout for ul-elements
     entry.classList.add("py-1", "border-blue-200", "border-2", "font-semibold", "pl-2", "rounded-lg", "flex", "flex-row", "justify-between");
+
+    console.log(amount.value);
     
     // Statement = Income --> text = green , Statement = Expense --> text = red
     if (statements.options[statements.selectedIndex].text === "Income") {
@@ -173,8 +178,8 @@ var addListElement = () => {
 // Gets Add-Button
 const addButton = document.querySelector("#add-Button");
 
-// Display inputs 
-var displayInputs = () => {
+// Display inputs after click
+var addListAfterClick = () => {
 
     // If no input for date and amount --> border = red
     if (!date.value && !amount.value) {
@@ -202,6 +207,8 @@ var displayInputs = () => {
         amount.classList.remove("border-4", "border-red-400");
     } 
 }
+
+// Display inputs after keypress
 
 var addListAfterKeypress = (event) => {
 
@@ -234,7 +241,7 @@ var addListAfterKeypress = (event) => {
 }
 
 // When Add-Button gets clicked --> display inputs
-addButton.addEventListener("click", displayInputs);
+addButton.addEventListener("click", addListAfterClick);
 
 // When "Enter" gets pressed --> display inputs
 date.addEventListener("keypress", addListAfterKeypress);
